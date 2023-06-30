@@ -47,7 +47,11 @@ public void PutArtist(ArtistModel artist) {
         ArtistDbContext? context = HttpContext.RequestServices.GetService(typeof(atl_artist_api.Data.ArtistDbContext)) as ArtistDbContext;
         context.UpdateArtist(artist);
 }
-
+[HttpDelete]
+public void DeleteArtist(ArtistModel artist) {
+        ArtistDbContext? context = HttpContext.RequestServices.GetService(typeof(atl_artist_api.Data.ArtistDbContext)) as ArtistDbContext;
+        context.DeleteArtist(artist);
+}
 
     }
 }
