@@ -92,6 +92,20 @@ namespace atl_artist_api.Data
     }
 }
 
+  public void DeleteArtist(ArtistModel artist)
+{
+    //ArtistModel artist = new ArtistModel();
+
+    using (MySqlConnection conn = GetConnection())
+    {
+        var sql = "delete from artists where id=@id";
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("id", artist.id);
+        cmd.ExecuteNonQuery();
+    }
+}
+
 
     }
 }
