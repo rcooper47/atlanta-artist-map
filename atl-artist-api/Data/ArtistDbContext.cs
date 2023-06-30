@@ -74,6 +74,24 @@ namespace atl_artist_api.Data
     return artist;
 }
 
+  public void UpdateArtist(ArtistModel artist)
+{
+    //ArtistModel artist = new ArtistModel();
+
+    using (MySqlConnection conn = GetConnection())
+    {
+        var sql = "insert into artists (id, name, top_song, neighborhood, genre) values (@id, @name, @topSong, @neighborhood, @genre)";
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("id", artist.id);
+        cmd.Parameters.AddWithValue("name", artist.name);
+        cmd.Parameters.AddWithValue("topSong", artist.topSong);
+        cmd.Parameters.AddWithValue("neighborhood", artist.neighborhood);
+        cmd.Parameters.AddWithValue("genre", artist.genre);
+        cmd.ExecuteNonQuery();
+    }
+}
+
 
     }
 }
