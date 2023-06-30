@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using atl_artist_api.Data;
+using atl_artist_api.Models;
+//TODO: Update to use DTO
 
 
 namespace atl_artist_api.Controllers
@@ -40,7 +42,11 @@ namespace atl_artist_api.Controllers
             //var _mappedPlayer = _mapper.Map<Player>(player);
             return Ok(context.GetArtistById(id));
 }
-
+[HttpPut]
+public void PutArtist(ArtistModel artist) {
+        ArtistDbContext? context = HttpContext.RequestServices.GetService(typeof(atl_artist_api.Data.ArtistDbContext)) as ArtistDbContext;
+        context.UpdateArtist(artist);
+}
 
 
     }
