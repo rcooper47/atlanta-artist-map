@@ -51,11 +51,12 @@ namespace atl_artist_api.Data
 
     using (MySqlConnection conn = GetConnection())
     {
-        var sql = $"select * from Artists where id = {id}";
+        var sql = $"select * from Artists where id = @id";
         conn.Open();
         MySqlCommand cmd = new MySqlCommand(sql, conn);
-
+        cmd.Parameters.AddWithValue("id", artist.id);
         using (var reader = cmd.ExecuteReader())
+        
         {
             if (reader.Read())
             {
@@ -73,7 +74,34 @@ namespace atl_artist_api.Data
     }
     return artist;
 }
+    public List<ArtistModel> GetArtistByLocation(string neighborhood)
+{
+    List<ArtistModel> list = new List<ArtistModel>();
 
+    using (MySqlConnection conn = GetConnection())
+    {
+        var sql = $"select * from Artists where neighborhood = @neighborhood";
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand(sql, conn);
+        cmd.Parameters.AddWithValue("neighborhood", neighborhood);
+        using (var reader = cmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                list.Add(new ArtistModel()
+                {
+                    id = Convert.ToInt32(reader["Id"]),
+                    name = reader["Name"].ToString(),
+                    topSong = reader["Top_song"].ToString(),
+                    neighborhood = reader["Neighborhood"].ToString(),
+                    genre = reader["Genre"].ToString()
+
+                });
+            }
+        }
+    }
+    return list;
+}
   public void UpdateArtist(ArtistModel artist)
 {
     //ArtistModel artist = new ArtistModel();

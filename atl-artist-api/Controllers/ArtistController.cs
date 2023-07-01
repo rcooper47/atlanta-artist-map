@@ -42,6 +42,15 @@ namespace atl_artist_api.Controllers
             //var _mappedPlayer = _mapper.Map<Player>(player);
             return Ok(context.GetArtistById(id));
 }
+
+       [HttpGet]
+       [Route("{neighborhood}")]
+        public IActionResult GetArtistByLocation(string neighborhood) {
+            // add try / except
+            ArtistDbContext? context = HttpContext.RequestServices.GetService(typeof(atl_artist_api.Data.ArtistDbContext)) as ArtistDbContext;
+            return Ok(context.GetArtistByLocation(neighborhood));
+}
+ //public ArtistModel GetArtistByLocation(int id)
 [HttpPut]
 public void PutArtist(ArtistModel artist) {
         ArtistDbContext? context = HttpContext.RequestServices.GetService(typeof(atl_artist_api.Data.ArtistDbContext)) as ArtistDbContext;
