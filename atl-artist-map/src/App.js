@@ -10,7 +10,7 @@ function App() {
   const [artists, setArtists] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get("https://pokeapi.co/api/v2/pokemon/pikachu").then((response) => {
+    axios.get("https://localhost:7189/api/artist/getartists").then((response) => {
       setArtists(response.data);
     });
   }, []);
@@ -30,7 +30,7 @@ function App() {
     </Popup>
   </Marker>
 </MapContainer> */}
-<h1>{artists.held_items.map(item => <div>{item}</div>)}
+<h1>{artists.map(item => <div>{item.name}</div>)}
     </h1>
     </div>
   );
