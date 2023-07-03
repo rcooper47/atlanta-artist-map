@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 
-builder.Services.Add(new ServiceDescriptor(typeof(ArtistDbContext), new ArtistDbContext(builder.Configuration.GetConnectionString("DefaultConnection"))));
+builder.Services.Add(new ServiceDescriptor(typeof(ArtistDbContext), new ArtistDbContext(builder.Configuration.GetConnectionString("AzureSQLConnection"))));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
